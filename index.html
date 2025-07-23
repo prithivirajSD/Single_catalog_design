@@ -1,1 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirari - The Future of Home Control</title>
+    <meta name="description" content="Mirari - The future of home control. Premium smart home technology and design." />
+    <meta name="author" content="Mirari" />
+    <meta property="og:site_name" content="Mirari" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+            overflow-x: hidden;
+        }
+
+        /* Navigation - Clean, Premium, Single Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0 50px;
+            background: #181818;
+            border-bottom: 2.5px solid #c9a961;
+            z-index: 1000;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            height: 68px;
+        }
+        .nav-logo {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #c9a961;
+            text-decoration: none;
+            line-height: 1;
+        }
+        .nav-center {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+            gap: 38px;
+            list-style: none;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 2px 0;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+        .nav-links a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 0%;
+            background: #c9a961;
+            transition: width 0.3s;
+            position: absolute;
+            left: 0; bottom: -3px;
+        }
+        .nav-links a:hover {
+            color: #c9a961;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-right {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+        }
+        .cta-button {
+            background: #c9a961;
+            color: #181818;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 700;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 18px;
+            box-shadow: 0 2px 8px #c9a96122;
+            line-height: 1;
+        }
+        .cta-button:hover {
+            background: #fff;
+            color: #c9a961;
+            transform: translateY(-1px) scale(1.04);
+        }
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            cursor: pointer;
+            margin-left: 18px;
+            z-index: 1101;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: #c9a961;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(24,24,24,0.65);
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .nav-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+        @media (max-width: 900px) {
+            nav {
+                padding: 0 12px;
+                height: 56px;
+            }
+            .nav-container {
+                height: 56px;
+            }
+            .nav-center {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .nav-links {
+                position: absolute;
+                top: 56px;
+                left: 0;
+                width: 100vw;
+                background: #181818;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                padding: 0;
+                margin: 0;
+                box-shadow: 0 8px 32px #0003;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                pointer-events: none;
+                border-bottom-left-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            .nav-links.open {
+                max-height: 400px;
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .nav-links li {
+                width: 100%;
+                border-bottom: 1px solid #222;
+            }
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 18px 24px;
+                font-size: 18px;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+            .nav-right {
+                width: 100%;
+                justify-content: center;
+                margin-top: 8px;
+            }
+            .cta-button {
+                margin: 18px 0 18px 24px;
+                width: calc(100% - 48px);
+            }
+        }
+        /* Add top margin to main content to prevent nav overlap */
+        body > section.hero {
+            margin-top: 0;
+        }
+
+        /* Hero Gradient and Floating Shapes */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 50px 80px;
+            position: relative;
+            background: linear-gradient(120deg, #f7f8fa 60%, #e0e7ef 100%);
+            overflow: hidden;
+        }
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(18px);
+            opacity: 0.18;
+            z-index: 0;
+            animation: floatShape 8s ease-in-out infinite alternate;
+        }
+        .floating-shape.shape1 {
+            width: 180px; height: 180px; left: 10%; top: 18%; background: #c9a961; animation-delay: 0s;
+        }
+        .floating-shape.shape2 {
+            width: 120px; height: 120px; right: 12%; top: 30%; background: #1a1a1a; animation-delay: 2s;
+        }
+        .floating-shape.shape3 {
+            width: 90px; height: 90px; left: 40%; bottom: 10%; background: #c9a961; animation-delay: 4s;
+        }
+        @keyframes floatShape {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.08); }
+        }
+        /* Hero Section */
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 200;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .hero-content .highlight {
+            color: #c9a961;
+            font-weight: 300;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 500px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: #1a1a1a;
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 16px 0;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            border-bottom-color: #1a1a1a;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 600px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .surface-mockup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 180px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .surface-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            animation: interfaceGlow 3s ease-in-out infinite alternate;
+        }
+        .surface-bg-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            border-radius: 12px;
+            filter: brightness(0.92) saturate(1.1);
+        }
+        .surface-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(34,34,34,0.18) 60%, rgba(34,34,34,0.55) 100%);
+            z-index: 2;
+            border-radius: 12px;
+        }
+        .control-grid {
+            position: relative;
+            z-index: 3;
+            margin-bottom: 18px;
+        }
+
+        @keyframes interfaceGlow {
+            0% { background: linear-gradient(45deg, #2a2a2a, #1a1a1a); }
+            100% { background: linear-gradient(45deg, #3a3a3a, #2a2a2a); }
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0 30px;
+        }
+
+        .control-item {
+            width: 50px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            animation: controlPulse 2s ease-in-out infinite;
+        }
+
+        .control-item:nth-child(2) { animation-delay: 0.3s; }
+        .control-item:nth-child(3) { animation-delay: 0.6s; }
+        .control-item:nth-child(4) { animation-delay: 0.9s; }
+
+        @keyframes controlPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 50px;
+            background: white;
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 48px;
+            font-weight: 200;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .features .highlight {
+            color: #c9a961;
+        }
+
+        .features-subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 80px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .feature-card {
+            text-align: left;
+            padding: 40px;
+            border-radius: 16px;
+            background: #fafafa;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            padding: 120px 50px;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .philosophy-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .philosophy h2 {
+            font-size: 56px;
+            font-weight: 200;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        .philosophy p {
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 1.6;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer - Premium, Minimal, Wide Alignment */
+        .footer-top-border {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #c9a961 0%, #fff0 100%);
+            opacity: 0.8;
+        }
+        footer {
+            background: #fff;
+            color: #181818;
+            padding: 0 0 24px 0;
+            position: relative;
+            border-top: 2.5px solid #c9a961;
+            box-shadow: 0 -4px 32px #c9a96111;
+        }
+        .footer-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 3fr 1fr;
+            align-items: start;
+            gap: 0;
+            padding: 48px 16px 0 16px;
+            position: relative;
+        }
+        .footer-logo-col {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+            min-width: 220px;
+        }
+        .footer-logo-combo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .footer-logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #c9a961;
+            font-family: 'Playfair Display', serif;
+        }
+        .footer-company {
+            font-size: 1.18rem;
+            font-weight: 600;
+            color: #bfae7c;
+            letter-spacing: 1px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .footer-cols {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .footer-col {
+            min-width: 140px;
+            flex: 1 1 140px;
+        }
+        .footer-col-title {
+            font-weight: 700;
+            color: #c9a961;
+            font-size: 1.08rem;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        .footer-col-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .footer-col-links a {
+            color: #181818;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            transition: color 0.2s;
+        }
+        .footer-col-links a:hover {
+            color: #c9a961;
+        }
+        .footer-social-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+            min-width: 120px;
+            gap: 18px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            color: #c9a961;
+            font-size: 18px;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+        .footer-social a:hover {
+            background: #c9a961;
+            color: #fff;
+            transform: scale(1.12);
+        }
+        .footer-bottom {
+            width: 100%;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 38px;
+            letter-spacing: 0.5px;
+            padding-bottom: 10px;
+        }
+        @media (max-width: 1100px) {
+            .footer-main {
+                grid-template-columns: 1fr 2fr 1fr;
+            }
+        }
+        @media (max-width: 900px) {
+            .footer-main {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                gap: 24px;
+                padding: 32px 8px 0 8px;
+            }
+            .footer-logo-col, .footer-social-col {
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto;
+            }
+            .footer-cols {
+                flex-direction: column;
+                gap: 24px;
+                align-items: center;
+            }
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 100px 20px 60px;
+            }
+            
+            .features, .philosophy {
+                padding: 80px 20px;
+            }
+        }
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInRight {
+            0% { opacity: 0; transform: translateX(40px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            30% { transform: translate(-50%, -50%) scale(1.08); }
+            60% { transform: translate(-50%, -50%) scale(0.96); }
+            80% { transform: translate(-50%, -50%) scale(1.03); }
+        }
+        /* Hero Animation */
+        .hero-content {
+            opacity: 0;
+            animation: fadeInUp 1.2s 0.2s forwards;
+        }
+        .hero-visual {
+            opacity: 0;
+            animation: fadeInRight 1.2s 0.5s forwards;
+        }
+        /* Feature Card Hover (already present, but enhance) */
+        .feature-card {
+            transition: all 0.3s cubic-bezier(.4,2,.3,1);
+        }
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.13);
+            background: #f3f3f3;
+        }
+        /* Nav Link Hover (enhanced underline) */
+        .nav-links a {
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: -4px;
+            height: 2px;
+            background: #c9a961;
+            opacity: 0;
+            transform: scaleX(0.5);
+            transition: all 0.3s;
+        }
+        .nav-links a:hover::after {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+        /* Button Hover (already present, but add shadow) */
+        .btn-primary:hover, .cta-button:hover {
+            box-shadow: 0 8px 25px rgba(201,169,97,0.18);
+        }
+        /* Surface-mockup bounce on hover */
+        .surface-mockup {
+            transition: box-shadow 0.3s, filter 0.3s;
+        }
+        .surface-mockup:hover {
+            box-shadow: 0 30px 80px rgba(201,169,97,0.18);
+            filter: brightness(1.04);
+            animation: bounce 0.7s;
+        }
+        /* Glassmorphism for Feature Cards */
+        .feature-card {
+            background: rgba(255,255,255,0.55);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.18);
+            transition: all 0.3s cubic-bezier(.4,2,.3,1);
+        }
+        .feature-card:hover {
+            background: rgba(255,255,255,0.75);
+            box-shadow: 0 20px 50px rgba(201,169,97,0.13);
+        }
+        /* Logo Glow on Hover */
+        .logo, .footer-logo {
+            transition: text-shadow 0.4s;
+        }
+        .logo:hover, .footer-logo:hover {
+            text-shadow: 0 0 16px #c9a961, 0 0 4px #fff;
+        }
+        /* SVG Wave Divider */
+        .wave-divider {
+            display: block;
+            width: 100%;
+            height: 60px;
+            margin-bottom: -2px;
+        }
+        /* Testimonial Section */
+        .testimonial {
+            background: linear-gradient(120deg, #e0e7ef 60%, #f7f8fa 100%);
+            padding: 80px 20px 60px;
+            text-align: center;
+        }
+        .testimonial-quote {
+            font-size: 28px;
+            font-style: italic;
+            color: #23272f;
+            max-width: 700px;
+            margin: 0 auto 24px;
+            font-weight: 300;
+        }
+        .testimonial-author {
+            font-size: 18px;
+            color: #c9a961;
+            font-weight: 500;
+        }
+        /* Pricing Section */
+        .pricing {
+            background: linear-gradient(120deg, #f7f8fa 60%, #e0e7ef 100%);
+            padding: 100px 20px 80px;
+        }
+        .pricing-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .pricing-title {
+            font-size: 2.6rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #23272f;
+            margin-bottom: 10px;
+        }
+        .pricing-subtitle {
+            font-size: 1.15rem;
+            color: #666;
+            margin-bottom: 60px;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 36px;
+            margin-top: 30px;
+            justify-items: center;
+        }
+        .pricing-card {
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(201,169,97,0.10), 0 2px 8px #0001;
+            border: 2.5px solid #f3e7c2;
+            padding: 48px 32px 40px;
+            text-align: center;
+            position: relative;
+            transition: box-shadow 0.25s, border-color 0.25s, transform 0.18s;
+            min-width: 320px;
+            max-width: 350px;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .pricing-card.popular {
+            border: 2.5px solid #c9a961;
+            box-shadow: 0 16px 48px 0 rgba(201,169,97,0.13), 0 2px 8px #c9a96122;
+            z-index: 1;
+            transform: scale(1.04);
+        }
+        .pricing-card:hover {
+            box-shadow: 0 16px 48px #c9a96133, 0 2px 8px #0002;
+            border-color: #c9a961;
+            transform: translateY(-6px) scale(1.045);
+        }
+        .pricing-icon {
+            font-size: 2.5rem;
+            color: #c9a961;
+            margin-bottom: 18px;
+        }
+        .pricing-plan {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #c9a961;
+            margin-bottom: 8px;
+        }
+        .pricing-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #23272f;
+            margin-bottom: 18px;
+        }
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 32px;
+        }
+        .pricing-features li {
+            font-size: 1.05rem;
+            color: #23272f;
+            margin-bottom: 10px;
+        }
+        .pricing-btn {
+            display: inline-block;
+            background: #c9a961;
+            color: #181818;
+            padding: 14px 36px;
+            border-radius: 30px;
+            font-size: 1.08rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 18px rgba(201,169,97,0.10);
+            border: none;
+        }
+        .pricing-btn:hover {
+            background: #181818;
+            color: #c9a961;
+            box-shadow: 0 8px 32px rgba(201,169,97,0.18);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .pricing-badge {
+            position: absolute;
+            top: 22px;
+            right: 22px;
+            background: #c9a961;
+            color: #fff;
+            font-size: 0.98rem;
+            font-weight: 700;
+            border-radius: 16px;
+            padding: 5px 18px;
+            box-shadow: 0 2px 8px #c9a96122;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+        @media (max-width: 900px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card {
+                min-width: 0;
+                max-width: 100%;
+                min-height: 420px;
+            }
+        }
+        .surface-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 24px 4px #c9a96155, 0 2px 8px #0002;
+            object-fit: cover;
+            background: #23272f;
+            border: 2px solid #fff3;
+            animation: surfaceImageGlow 2.5s ease-in-out infinite alternate;
+        }
+        @keyframes surfaceImageGlow {
+            0% { box-shadow: 0 0 16px 2px #c9a96133, 0 2px 8px #0002; }
+            100% { box-shadow: 0 0 32px 8px #c9a96177, 0 2px 8px #0002; }
+        }
+        /* Mirari Overview Section (like screenshot) */
+        .mirari-overview {
+            background: #fff;
+            padding: 80px 0 60px 0;
+        }
+        .mirari-overview-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .mirari-overview-header {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+        .mirari-overview-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.15;
+            margin-bottom: 12px;
+            color: #23272f;
+            text-shadow: 0 2px 12px #c9a96111;
+        }
+        .mirari-overview-header .highlight {
+            background: linear-gradient(90deg, #c9a961 30%, #f7e7b4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: 700;
+            text-shadow: 0 2px 8px #c9a96122;
+        }
+        .mirari-overview-desc,
+        .mirari-overview-features,
+        .mirari-feature-title,
+        .mirari-feature-text,
+        .mirari-overview-comingsoon {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .mirari-overview-desc {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .mirari-overview-content {
+            display: flex;
+            gap: 48px;
+            align-items: stretch;
+            justify-content: center;
+        }
+        .mirari-overview-image {
+            display: flex;
+            align-items: stretch;
+        }
+        .mirari-overview-image img {
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            min-height: 320px;
+            object-fit: cover;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px #0001;
+            background: #f5f5f5;
+            display: block;
+        }
+        .mirari-overview-features {
+            flex: 1 1 370px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px #0001;
+            padding: 28px 28px 18px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 320px;
+            justify-content: center;
+        }
+        .mirari-overview-features h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .mirari-overview-features-desc {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 18px;
+        }
+        .mirari-feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 24px;
+            margin-top: 8px;
+        }
+        .mirari-feature-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: #fff;
+            border-radius: 16px;
+            border: 1.5px solid #f3e7c2;
+            box-shadow: 0 4px 18px #c9a96111, 0 1.5px 6px #0001;
+            padding: 20px 18px 18px 18px;
+            transition: box-shadow 0.25s, border-color 0.25s, transform 0.18s;
+            position: relative;
+        }
+        .mirari-feature-card:hover {
+            box-shadow: 0 8px 32px #c9a96133, 0 2px 8px #0002;
+            border-color: #c9a961;
+            transform: translateY(-4px) scale(1.025);
+        }
+        .mirari-feature-icon {
+            font-size: 1.7rem;
+            margin-top: 2px;
+            color: #c9a961;
+            flex-shrink: 0;
+        }
+        .mirari-feature-title {
+            font-weight: 600;
+            font-size: 1.08rem;
+            margin-bottom: 2px;
+        }
+        .mirari-feature-text {
+            color: #666;
+            font-size: 0.98rem;
+        }
+        .mirari-overview-comingsoon {
+            margin-top: 18px;
+            color: #c9a961;
+            font-size: 1rem;
+            background: #f8f6ef;
+            border-radius: 16px;
+            padding: 7px 18px;
+            display: inline-block;
+            font-weight: 500;
+        }
+        @media (max-width: 900px) {
+            .mirari-overview-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 32px;
+            }
+            .mirari-overview-image img {
+                width: 100%;
+                max-width: 420px;
+                height: 220px;
+                min-height: unset;
+            }
+            .mirari-overview-features {
+                width: 100%;
+                padding: 18px 10px 12px 10px;
+                min-height: unset;
+            }
+        }
+        .hero-image-layout {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 68px;
+            min-height: 420px;
+        }
+        .hero-content {
+            flex: 0 0 50%;
+            max-width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 0 48px 0 0;
+        }
+        .hero-image {
+            flex: 0 0 50%;
+            max-width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: stretch;
+            justify-content: flex-end;
+        }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            object-fit: cover;
+            border-top-right-radius: 32px;
+            border-bottom-right-radius: 32px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            box-shadow: 0 8px 32px #0001;
+            background: #f5f5f5;
+            display: block;
+        }
+        @media (max-width: 900px) {
+            .hero-image-layout {
+                flex-direction: column;
+                min-height: unset;
+            }
+            .hero-content, .hero-image {
+                flex: 1 1 100%;
+                max-width: 100%;
+                padding: 0;
+            }
+            .hero-image img {
+                width: 100%;
+                min-height: 180px;
+                height: 220px;
+                border-radius: 24px;
+            }
+        }
+        /* Testimonial Premium Section */
+        .testimonial-premium {
+            background: #fffbe9;
+            padding: 80px 0 60px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            position: relative;
+        }
+        .testimonial-arrow.gold {
+            background: #c9a961 !important;
+            border: none;
+            color: #fff;
+            box-shadow: 0 4px 18px #c9a96133, 0 2px 8px #0001;
+            width: 54px;
+            height: 54px;
+            min-width: 54px;
+            min-height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            transition: box-shadow 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+            outline: none;
+        }
+        .testimonial-arrow.gold.left {
+            left: calc(50% - 340px); /* Overlap left edge of card */
+        }
+        .testimonial-arrow.gold.right {
+            right: calc(50% - 340px); /* Overlap right edge of card */
+        }
+        @media (max-width: 700px) {
+            .testimonial-arrow.gold {
+                position: static;
+                transform: none;
+                margin: 18px 8px 0 8px;
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                min-height: 40px;
+            }
+            .testimonial-premium {
+                flex-direction: column;
+                gap: 0;
+            }
+            .testimonial-carousel {
+                min-height: 340px;
+            }
+        }
+        .testimonial-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 540px;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .testimonial-card {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px #c9a96122, 0 2px 8px #0001;
+            border: 2px solid #f3e7c2;
+            max-width: 540px;
+            padding: 48px 38px 38px 38px;
+            text-align: center;
+            position: absolute;
+            left: 0; right: 0;
+            top: 0; bottom: 0;
+            margin: auto;
+            z-index: 2;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .testimonial-card.active {
+            display: flex;
+            opacity: 1;
+            position: relative;
+            pointer-events: auto;
+            z-index: 3;
+            animation: fadeInUp 0.7s;
+        }
+        .testimonial-arrow {
+            background: #fff;
+            border: 2px solid #c9a961;
+            color: #c9a961;
+            font-size: 2.2rem;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #c9a96122;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            z-index: 10;
+            margin: 0 10px;
+        }
+        .testimonial-arrow:hover {
+            background: #c9a961;
+            color: #fff;
+            transform: scale(1.08);
+        }
+        .testimonial-arrow.gold {
+            background: #c9a961 !important;
+            border: none;
+            color: #fff;
+            box-shadow: 0 4px 18px #c9a96133, 0 2px 8px #0001;
+            width: 54px;
+            height: 54px;
+            min-width: 54px;
+            min-height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            transition: box-shadow 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+            outline: none;
+        }
+        .testimonial-arrow.gold.left {
+            left: calc(50% - 340px); /* Overlap left edge of card */
+        }
+        .testimonial-arrow.gold.right {
+            right: calc(50% - 340px); /* Overlap right edge of card */
+        }
+        @media (max-width: 700px) {
+            .testimonial-arrow.gold {
+                position: static;
+                transform: none;
+                margin: 18px 8px 0 8px;
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                min-height: 40px;
+            }
+            .testimonial-premium {
+                flex-direction: column;
+                gap: 0;
+            }
+            .testimonial-carousel {
+                min-height: 340px;
+            }
+        }
+        .testimonial-quote-mark {
+            font-size: 4.5rem;
+            color: #c9a961;
+            line-height: 1;
+            margin-bottom: -18px;
+            font-family: 'Playfair Display', serif;
+        }
+        .testimonial-quote-text {
+            font-size: 1.35rem;
+            color: #23272f;
+            font-weight: 500;
+            margin-bottom: 32px;
+            font-family: 'Playfair Display', serif;
+        }
+        .testimonial-profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .testimonial-avatar {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2.5px solid #c9a961;
+            box-shadow: 0 2px 8px #c9a96122;
+        }
+        .testimonial-author-info {
+            text-align: left;
+        }
+        .testimonial-author {
+            font-weight: 700;
+            color: #c9a961;
+            font-size: 1.08rem;
+        }
+        .testimonial-role {
+            color: #888;
+            font-size: 0.98rem;
+        }
+
+        /* Philosophy Modern Section */
+        .philosophy-modern {
+            position: relative;
+            background: #f7f8fa;
+            padding: 100px 0 80px 0;
+            overflow: hidden;
+        }
+        .philosophy-modern-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            opacity: 0.08;
+            z-index: 1;
+        }
+        .philosophy-modern-container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+        }
+        .philosophy-modern-content {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px #c9a96111;
+            padding: 48px 38px 38px 38px;
+            text-align: center;
+        }
+        .philosophy-modern-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: #23272f;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+        .philosophy-highlight {
+            background: linear-gradient(90deg, #c9a961 30%, #f7e7b4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: 700;
+        }
+        .philosophy-modern-content p {
+            color: #666;
+            font-size: 1.13rem;
+            margin-bottom: 0;
+        }
+        @media (max-width: 900px) {
+            .testimonial-card, .philosophy-modern-content {
+                padding: 28px 10px 18px 10px;
+            }
+            .philosophy-modern-container {
+                min-height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#" class="logo">Mirari</a>
+            </div>
+            <div class="nav-hamburger" id="navHamburger" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-center">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#product">Product</a></li>
+                    <li><a href="#design">Design</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="cta-button">Get Started</a>
+            </div>
+        </div>
+        <div class="nav-overlay" id="navOverlay"></div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-image-layout">
+            <div class="hero-content">
+                <h1>The Future of <span class="highlight">Home Control</span></h1>
+                <p>Mirari Surface transforms your wall into a seamless control center. No voice, no camera, no clutter — just beautiful, intuitive design.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn-primary">Discover Mirari Surface</a>
+                    <a href="#" class="btn-secondary">Watch Demo ▶</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=900&q=80" alt="Luxury Hotel Room with TV and Bed" />
+            </div>
+        </div>
+    </section>
+    <!-- SVG Wave Divider -->
+    <svg class="wave-divider" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" fill-opacity="1" d="M0,32 C360,80 1080,0 1440,32 L1440,60 L0,60 Z"></path></svg>
+
+    <section class="mirari-overview">
+        <div class="mirari-overview-container">
+            <div class="mirari-overview-header">
+                <h2>Reimagining <span class="highlight">Home Control</span></h2>
+                <p class="mirari-overview-desc">Mirari Surface replaces outdated physical switches with a stunning, minimalist touchscreen that becomes part of your wall.</p>
+            </div>
+            <div class="mirari-overview-content">
+                <div class="mirari-overview-image">
+                    <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=800&q=80" alt="Modern Living Room" />
+                </div>
+                <div class="mirari-overview-features">
+                    <h3>Beautiful by Design</h3>
+                    <p class="mirari-overview-features-desc">Every detail of Mirari Surface has been carefully crafted to create an emotionally calming experience that elevates your living space.</p>
+                    <div class="mirari-feature-list">
+                        <div class="mirari-feature-card">
+                            <div class="mirari-feature-icon">🖐️</div>
+                            <div>
+                                <div class="mirari-feature-title">Intuitive Interface</div>
+                                <div class="mirari-feature-text">Capacitive touch display with fluid animations and responsive feedback.</div>
+                            </div>
+                        </div>
+                        <div class="mirari-feature-card">
+                            <div class="mirari-feature-icon">🎨</div>
+                            <div>
+                                <div class="mirari-feature-title">Design Object</div>
+                                <div class="mirari-feature-text">Crafted to blend seamlessly into modern interiors as a beautiful wall element.</div>
+                            </div>
+                        </div>
+                        <div class="mirari-feature-card">
+                            <div class="mirari-feature-icon">⚡</div>
+                            <div>
+                                <div class="mirari-feature-title">Instant Control</div>
+                                <div class="mirari-feature-text">Lightning-fast response for lights, fans, scenes, and smart home devices.</div>
+                            </div>
+                        </div>
+                        <div class="mirari-feature-card">
+                            <div class="mirari-feature-icon">🔒</div>
+                            <div>
+                                <div class="mirari-feature-title">Privacy First</div>
+                                <div class="mirari-feature-text">No cameras, no microphones, no data collection — just pure control.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mirari-overview-comingsoon">Coming Soon · Pre-order starts Q2 2025</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="pricing-container">
+            <h2 class="pricing-title">Choose Your <span class="highlight">Mirari</span></h2>
+            <p class="pricing-subtitle">Simple, transparent pricing for every home. No hidden fees.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-icon">🌱</div>
+                    <div class="pricing-plan">Starter</div>
+                    <div class="pricing-price">$199</div>
+                    <ul class="pricing-features">
+                        <li>1 Mirari Surface</li>
+                        <li>Basic Scenes</li>
+                        <li>Standard Support</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Get Started</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-icon">⭐</div>
+                    <div class="pricing-plan">Pro</div>
+                    <div class="pricing-price">$399</div>
+                    <ul class="pricing-features">
+                        <li>3 Mirari Surfaces</li>
+                        <li>Advanced Scenes</li>
+                        <li>Priority Support</li>
+                        <li>Free Installation</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Most Popular</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-icon">👑</div>
+                    <div class="pricing-plan">Elite</div>
+                    <div class="pricing-price">$799</div>
+                    <ul class="pricing-features">
+                        <li>7 Mirari Surfaces</li>
+                        <li>All Features Unlocked</li>
+                        <li>24/7 Concierge Support</li>
+                        <li>Custom Integration</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Go Elite</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial Section -->
+    <section class="testimonial-premium">
+        <button class="testimonial-arrow gold left" id="testimonialPrev" aria-label="Previous testimonial">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 26L12 16L20 6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div class="testimonial-carousel">
+            <div class="testimonial-card active">
+                <div class="testimonial-quote-mark">“</div>
+                <div class="testimonial-quote-text">Mirari Surface is the most beautiful and intuitive smart home control I’ve ever seen. It’s like having the future on your wall.</div>
+                <div class="testimonial-profile">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Interior Design Magazine Editor" class="testimonial-avatar" />
+                    <div class="testimonial-author-info">
+                        <div class="testimonial-author">Alex Carter</div>
+                        <div class="testimonial-role">Editor, Interior Design Magazine</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote-mark">“</div>
+                <div class="testimonial-quote-text">The attention to detail and seamless integration into my home is unmatched. Mirari is a game changer for smart living.</div>
+                <div class="testimonial-profile">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Homeowner" class="testimonial-avatar" />
+                    <div class="testimonial-author-info">
+                        <div class="testimonial-author">Priya Sharma</div>
+                        <div class="testimonial-role">Homeowner, Mumbai</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote-mark">“</div>
+                <div class="testimonial-quote-text">No other smart home device blends so beautifully with my interiors. Effortless control, stunning design.</div>
+                <div class="testimonial-profile">
+                    <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Architect" class="testimonial-avatar" />
+                    <div class="testimonial-author-info">
+                        <div class="testimonial-author">Liam Chen</div>
+                        <div class="testimonial-role">Architect, Chen & Partners</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-quote-mark">“</div>
+                <div class="testimonial-quote-text">Mirari Surface is the only switchboard I recommend to my clients. It’s intuitive, private, and absolutely gorgeous.</div>
+                <div class="testimonial-profile">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Interior Designer" class="testimonial-avatar" />
+                    <div class="testimonial-author-info">
+                        <div class="testimonial-author">Sofia Rossi</div>
+                        <div class="testimonial-role">Interior Designer, Milan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="testimonial-arrow gold right" id="testimonialNext" aria-label="Next testimonial">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 6L20 16L12 26" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </section>
+
+    <section class="philosophy-modern">
+        <div class="philosophy-modern-bg"></div>
+        <div class="philosophy-modern-container">
+            <div class="philosophy-modern-content">
+                <h2><span class="philosophy-highlight">Not just a gadget</span><br>— a design object for your home</h2>
+                <p>Mirari Surface quietly controls your home while blending into modern interiors. Think of it as the iPhone of switchboards — elegant, seamless, and emotionally resonant. This is home control, reimagined for the design-conscious.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-main">
+            <div class="footer-logo-col">
+                <div class="footer-logo-combo">
+                    <span class="footer-logo">Mirari</span>
+                    
+                </div>
+            </div>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <div class="footer-col-title">Product</div>
+                    <div class="footer-col-links">
+                        <a href="#">Mirari Surface</a>
+                        <a href="#">Touch Display</a>
+                        <a href="#">Wall Mount</a>
+                        <a href="#">Accessories</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Features</div>
+                    <div class="footer-col-links">
+                        <a href="#">Scenes</a>
+                        <a href="#">Instant Control</a>
+                        <a href="#">Privacy</a>
+                        <a href="#">No Camera</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Compatibility</div>
+                    <div class="footer-col-links">
+                        <a href="#">Smart Lights</a>
+                        <a href="#">Fans</a>
+                        <a href="#">Switches</a>
+                        <a href="#">Voice Assistants</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Orders</div>
+                    <div class="footer-col-links">
+                        <a href="#">Order Status</a>
+                        <a href="#">Shipping</a>
+                        <a href="#">Returns</a>
+                        <a href="#">Support</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Sales</div>
+                    <div class="footer-col-links">
+                        <a href="#">Offers</a>
+                        <a href="#">Bulk Orders</a>
+                        <a href="#">Dealers</a>
+                        <a href="#">Partners</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Offers</div>
+                    <div class="footer-col-links">
+                        <a href="#">Current Offers</a>
+                        <a href="#">Gift Cards</a>
+                        <a href="#">Refer & Earn</a>
+                        <a href="#">Newsletter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-social-col">
+                <div class="footer-social">
+                    <a href="#" aria-label="Twitter" title="Twitter">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557a9.93 9.93 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195a4.92 4.92 0 0 0-8.39 4.482C7.691 8.095 4.066 6.13 1.64 3.161c-.542.929-.856 2.01-.857 3.17 0 2.188 1.115 4.117 2.823 5.254a4.904 4.904 0 0 1-2.229-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.417A9.867 9.867 0 0 1 0 21.543a13.94 13.94 0 0 0 7.548 2.209c9.057 0 14.009-7.496 14.009-13.986 0-.21-.005-.423-.015-.634A9.936 9.936 0 0 0 24 4.557z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Facebook" title="Facebook">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .592 0 1.326v21.348C0 23.406.597 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.729 0 1.326-.594 1.326-1.326V1.326C24 .592 23.403 0 22.675 0"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram" title="Instagram">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.266.069 1.646.069 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.241 1.246-3.608 1.308-1.266.058-1.646.069-4.85.069s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.974-.974 2.241-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.775.131 4.602.425 3.635 1.392 2.668 2.359 2.374 3.532 2.315 4.808 2.256 6.088 2.243 6.497 2.243 12c0 5.503.013 5.912.072 7.192.059 1.276.353 2.449 1.32 3.416.967.967 2.14 1.261 3.416 1.32 1.28.059 1.689.072 7.192.072s5.912-.013 7.192-.072c1.276-.059 2.449-.353 3.416-1.32.967-.967 1.261-2.14 1.32-3.416.059-1.28.072-1.689.072-7.192s-.013-5.912-.072-7.192c-.059-1.276-.353-2.449-1.32-3.416C21.051.425 19.878.131 18.602.072 17.322.013 16.913 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Mirari. The future of home control.
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navigation background opacity on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(24, 24, 24, 0.99)';
+            } else {
+                nav.style.background = 'rgba(24, 24, 24, 0.97)';
+            }
+        });
+
+        // Hamburger menu toggle and overlay
+        const navHamburger = document.getElementById('navHamburger');
+        const navLinks = document.getElementById('navLinks');
+        const navOverlay = document.getElementById('navOverlay');
+        function closeMobileNav() {
+            navLinks.classList.remove('open');
+            navOverlay.classList.remove('open');
+            navHamburger.setAttribute('aria-expanded', 'false');
+        }
+        navHamburger.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navOverlay.classList.toggle('open', isOpen);
+            navHamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        navHamburger.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const isOpen = navLinks.classList.toggle('open');
+                navOverlay.classList.toggle('open', isOpen);
+                navHamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            }
+        });
+        navOverlay.addEventListener('click', closeMobileNav);
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) closeMobileNav();
+        });
+
+        // Interactive surface mockup
+        const surface = document.querySelector('.surface-screen');
+        const controls = document.querySelectorAll('.control-item');
+        const surfaceMockup = document.querySelector('.surface-mockup');
+        controls.forEach((control, index) => {
+            control.addEventListener('click', () => {
+                // Add ripple effect
+                control.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    control.style.transform = 'scale(1)';
+                }, 150);
+                // Change background color briefly
+                surface.style.background = 'linear-gradient(45deg, #4a4a4a, #3a3a3a)';
+                setTimeout(() => {
+                    surface.style.background = 'linear-gradient(45deg, #2a2a2a, #1a1a1a)';
+                }, 300);
+                // Bounce the surface mockup
+                surfaceMockup.style.animation = 'bounce 0.7s';
+                setTimeout(() => {
+                    surfaceMockup.style.animation = '';
+                }, 700);
+            });
+        });
+        // Animate hero on load
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.hero-content').style.opacity = 1;
+            document.querySelector('.hero-visual').style.opacity = 1;
+        });
+
+        // Testimonial Carousel
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        let testimonialIndex = 0;
+        function showTestimonial(idx) {
+            testimonialCards.forEach((card, i) => {
+                card.classList.toggle('active', i === idx);
+            });
+        }
+        document.getElementById('testimonialPrev').addEventListener('click', () => {
+            testimonialIndex = (testimonialIndex - 1 + testimonialCards.length) % testimonialCards.length;
+            showTestimonial(testimonialIndex);
+        });
+        document.getElementById('testimonialNext').addEventListener('click', () => {
+            testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
+            showTestimonial(testimonialIndex);
+        });
+        showTestimonial(testimonialIndex);
+    </script>
+</body>
+</html> 
